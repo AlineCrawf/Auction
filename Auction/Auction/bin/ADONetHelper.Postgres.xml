@@ -1,0 +1,244 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>ADONetHelper.Postgres</name>
+    </assembly>
+    <members>
+        <member name="T:ADONetHelper.Postgres.PostgresClient">
+            <summary>
+            A specialized instance of <see cref="T:ADONetHelper.DbClient"/> that is used to query a Postgres database system
+            </summary>
+            <seealso cref="T:ADONetHelper.DbClient"/>
+        </member>
+        <member name="E:ADONetHelper.Postgres.PostgresClient.Notice">
+            <summary>
+            Occurs on NoticeResponses from the PostgreSQL backend.
+            </summary>
+            <value>
+            Represents the method that handles the <see cref="E:ADONetHelper.Postgres.PostgresClient.Notification"/> events.
+            </value>
+        </member>
+        <member name="E:ADONetHelper.Postgres.PostgresClient.Notification">
+            <summary>
+            Occurs on NotificationResponses from the PostgreSQL backend.
+            </summary>
+            <value>
+            Represents the method that handles the <see cref="E:ADONetHelper.Postgres.PostgresClient.Notification"/> events.
+            </value>
+        </member>
+        <member name="P:ADONetHelper.Postgres.PostgresClient.Connection">
+            <summary>
+            Gets the connection.
+            </summary>
+            <value>
+            The connection.
+            </value>
+        </member>
+        <member name="P:ADONetHelper.Postgres.PostgresClient.TypeMapper">
+            <summary>
+            The connection specific type mapper, all modifications affect the current connection only and all changes are lost when the connection closes
+            </summary>
+        </member>
+        <member name="P:ADONetHelper.Postgres.PostgresClient.ProvidePasswordCallback">
+            <summary>
+            Gets or sets the delegate used to generate a password for new database connections
+            </summary>
+        </member>
+        <member name="P:ADONetHelper.Postgres.PostgresClient.ProvideClientCertificatesCallback">
+            <summary>
+            Selects the local Secure Sockets Layer (SSL) certificate used for authentication.
+            </summary>
+            <value>
+            An instance of <see cref="P:ADONetHelper.Postgres.PostgresClient.ProvideClientCertificatesCallback"/>
+            </value>
+            <seealso cref="T:Npgsql.ProvideClientCertificatesCallback"/>
+        </member>
+        <member name="P:ADONetHelper.Postgres.PostgresClient.UserCertificateValidationCallback">
+            <summary>
+            Verifies the remote Secure Sockets Layer (SSL) certificate used for authentication. 
+            Ignored if TrustServerCertificate is set.
+            </summary>
+            <value>
+            An instance of <see cref="T:System.Net.Security.RemoteCertificateValidationCallback"/>
+            </value>
+        </member>
+        <member name="P:ADONetHelper.Postgres.PostgresClient.Timezone">
+            <summary>
+            Returns The connection's timezone as reported by PostgreSQL, in the IANA/Olson database format.
+            </summary>
+            <value>
+            The connection's timezone as reported by PostgreSQL, in the IANA/Olson database format.
+            </value>
+        </member>
+        <member name="P:ADONetHelper.Postgres.PostgresClient.HasIntegerDateTimes">
+            <summary>
+            Reports whether the backend uses the newer integer timestamp representation. 
+            Note that the old floating point representation is not supported. Meant for use by type plugins (e.g. Nodatime)
+            </summary>
+            <value>
+              <c>true</c> if this instance has integer date times; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="P:ADONetHelper.Postgres.PostgresClient.Port">
+            <summary>
+            The port number of the backend server
+            </summary>
+            <value>
+            The port.
+            </value>
+        </member>
+        <member name="P:ADONetHelper.Postgres.PostgresClient.PostgresVersion">
+            <summary>
+            Gets the postgres version.
+            </summary>
+            <value>
+            The postgres version.
+            </value>
+        </member>
+        <member name="P:ADONetHelper.Postgres.PostgresClient.HostName">
+            <summary>
+            Gets the name of the backend host.
+            </summary>
+            <value>
+            The name of the host.
+            </value>
+        </member>
+        <member name="P:ADONetHelper.Postgres.PostgresClient.ProcessID">
+            <summary>
+            Gets the process identifier.
+            </summary>
+            <value>
+            The process identifier.
+            </value>
+        </member>
+        <member name="P:ADONetHelper.Postgres.PostgresClient.IntegratedSecurity">
+            <summary>
+            Gets a value indicating whether windows authentication is required to log in.
+            </summary>
+            <value>
+              <c>true</c> if required to log in; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="P:ADONetHelper.Postgres.PostgresClient.UserName">
+            <summary>
+            The name of the user from the connection string
+            </summary>
+            <value>
+            The name of the user.
+            </value>
+        </member>
+        <member name="M:ADONetHelper.Postgres.PostgresClient.#ctor(System.String,System.Data.CommandType)">
+            <summary>
+            The overloaded constuctor that will initialize the <paramref name="connectionString"/>, And <paramref name="queryCommandType"/>
+            </summary>
+            <param name="connectionString">The connection string used to query a data store</param>
+            <param name="queryCommandType">Represents how a command should be interpreted by the data provider</param>
+        </member>
+        <member name="M:ADONetHelper.Postgres.PostgresClient.#ctor(System.String)">
+            <summary>
+            The overloaded constuctor that will initialize the <paramref name="connectionString"/>
+            </summary>
+            <param name="connectionString">The connection string used to query a data store</param>
+        </member>
+        <member name="M:ADONetHelper.Postgres.PostgresClient.#ctor(ADONetHelper.Core.ISqlExecutor)">
+            <summary>
+            Intializes the <see cref="T:ADONetHelper.Postgres.PostgresClient"/> with a <see cref="T:ADONetHelper.Core.ISqlExecutor"/>
+            </summary>
+            <param name="executor">An instance of <see cref="T:ADONetHelper.Core.ISqlExecutor"/></param>
+        </member>
+        <member name="M:ADONetHelper.Postgres.PostgresClient.#ctor(System.String,ADONetHelper.Core.IDbObjectFactory)">
+            <summary>
+            Insantiates a new instance of <see cref="T:ADONetHelper.Postgres.PostgresClient"/> using the passed in <paramref name="connectionString"/> and <paramref name="factory"/>
+            </summary>
+            <param name="connectionString">Connection string to use to query a database</param>
+            <param name="factory">An instance of <see cref="T:ADONetHelper.Core.IDbObjectFactory"/></param>
+        </member>
+        <member name="M:ADONetHelper.Postgres.PostgresClient.#ctor(Npgsql.NpgsqlConnection)">
+            <summary>
+            Constructor to query a database using an existing <see cref="T:Npgsql.NpgsqlConnection"/> to initialize the <paramref name="connection"/>
+            </summary>
+            <param name="connection">An instance of <see cref="T:Npgsql.NpgsqlConnection"/> to use to query a database </param>
+        </member>
+        <member name="M:ADONetHelper.Postgres.PostgresClient.#ctor(Npgsql.NpgsqlConnection,System.Data.CommandType)">
+            <summary>
+            Constructor to query a database using an existing <see cref="T:Npgsql.NpgsqlConnection"/> to initialize the <paramref name="connection"/> and <paramref name="commandType"/>
+            </summary>
+            <param name="commandType">Represents how a command should be interpreted by the data provider</param>
+            <param name="connection">An instance of <see cref="T:Npgsql.NpgsqlConnection"/> to use to query a database </param>
+        </member>
+        <member name="M:ADONetHelper.Postgres.PostgresClient.CloseAsync">
+            <summary>
+            Closes the asynchronous.
+            </summary>
+        </member>
+        <member name="M:ADONetHelper.Postgres.PostgresClient.UnPrepareAllStatements">
+            <summary>
+            Unprepares all statements on the current <see cref="T:Npgsql.NpgsqlConnection"/>
+            </summary>
+        </member>
+        <member name="M:ADONetHelper.Postgres.PostgresClient.Wait">
+            <summary>
+            Waits this instance.
+            </summary>
+        </member>
+        <member name="M:ADONetHelper.Postgres.PostgresClient.Wait(System.Int32)">
+            <summary>
+            Waits the specified timeout.
+            </summary>
+            <param name="timeout">The timeout.</param>
+        </member>
+        <member name="M:ADONetHelper.Postgres.PostgresClient.Wait(System.TimeSpan)">
+            <summary>
+            Waits the specified timeout.
+            </summary>
+            <param name="timeout">The timeout.</param>
+        </member>
+        <member name="M:ADONetHelper.Postgres.PostgresClient.WaitAsync(System.Threading.CancellationToken)">
+            <summary>
+            Waits the asynchronous.
+            </summary>
+            <param name="token">The token.</param>
+            <returns></returns>
+        </member>
+        <member name="M:ADONetHelper.Postgres.PostgresClient.ReloadTypes">
+            <summary>
+            Flushes the type cache for this <see cref="T:Npgsql.NpgsqlConnection"/> <see cref="P:Npgsql.NpgsqlConnection.ConnectionString"/> and reloads types for this connection only
+            </summary>
+        </member>
+        <member name="M:ADONetHelper.Postgres.PostgresClient.GetRawCopyStream(System.String)">
+            <summary>
+            Gets the raw copy stream.
+            </summary>
+            <param name="copyCommand">The copy command.</param>
+            <returns></returns>
+        </member>
+        <member name="M:ADONetHelper.Postgres.PostgresClient.GetTextExporter(System.String)">
+            <summary>
+            Gets the text exporter.
+            </summary>
+            <param name="copyToCommand">The copy to command.</param>
+            <returns></returns>
+        </member>
+        <member name="M:ADONetHelper.Postgres.PostgresClient.GetTextImporter(System.String)">
+            <summary>
+            Gets the text importer.
+            </summary>
+            <param name="copyFromCommand">The copy from command.</param>
+            <returns></returns>
+        </member>
+        <member name="M:ADONetHelper.Postgres.PostgresClient.GetBinaryExporter(System.String)">
+            <summary>
+            Gets the binary exporter.
+            </summary>
+            <param name="copyToCommand">The copy to command.</param>
+            <returns></returns>
+        </member>
+        <member name="M:ADONetHelper.Postgres.PostgresClient.GetBinaryImporter(System.String)">
+            <summary>
+            Gets the binary importer.
+            </summary>
+            <param name="copyFromCommand">The copy from command.</param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

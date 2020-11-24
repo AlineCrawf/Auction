@@ -1,0 +1,29 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Account.master.cs" Inherits="Auction.Account" %>
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <link rel="stylesheet" href="css/account.css">
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <div>
+        <ul class="menu-main">
+          <li style="float:left"><a href="MainPage" class="current">Торги</a></li>
+          <li style="float:right"><a href="Customer">Аккаунт</a></li>
+          <li style="float:right"><a href="Customer_shop">Покупки</a></li>
+        </ul>
+    </div>
+    <br/>
+    <br/>
+    <br/>
+    <div>
+          <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+             </asp:ContentPlaceHolder>
+    </div>
+</body>
+</html>
