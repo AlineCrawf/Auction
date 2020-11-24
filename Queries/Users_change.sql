@@ -1,0 +1,1 @@
+INSERT INTO login (phone, password, role) values ('+380954672720', 'd8578edf8458ce06fbc5bb76a58c5ca4',4) -- qwerty
