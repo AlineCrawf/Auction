@@ -283,7 +283,9 @@
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
     <Content Include="Request.aspx" />
+    <Content Include="SignUp.aspx" />
     <Content Include="Torg.aspx" />
+    <Content Include="Tovar.aspx" />
     <Content Include="_CreateNewNuGetPackage\DoNotModify\NuGet.exe" />
     <Content Include="Account.Master" />
     <Content Include="Admin.Master" />
@@ -414,12 +416,26 @@
     <Compile Include="SignIn.aspx.designer.cs">
       <DependentUpon>SignIn.aspx</DependentUpon>
     </Compile>
+    <Compile Include="SignUp.aspx.cs">
+      <DependentUpon>SignUp.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SignUp.aspx.designer.cs">
+      <DependentUpon>SignUp.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Torg.aspx.cs">
       <DependentUpon>Torg.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Torg.aspx.designer.cs">
       <DependentUpon>Torg.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Tovar.aspx.cs">
+      <DependentUpon>Tovar.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Tovar.aspx.designer.cs">
+      <DependentUpon>Tovar.aspx</DependentUpon>
     </Compile>
     <Compile Include="User.cs" />
   </ItemGroup>

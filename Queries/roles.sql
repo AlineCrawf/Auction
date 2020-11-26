@@ -1,6 +1,13 @@
-CREATE ROLE Admin with PASSWORD 'AdMin';
-CREATE ROLE Expert with PASSWORD 'ExPeRt';
-CREATE ROLE Seller with PASSWORD 'SeLlEr';
-CREATE ROLE Customer with PASSWORD 'CuStOmEr';
+DROP ROLE Admin;
+DROP ROLE Expert;
+DROP ROLE Seller;
+DROP ROLE Customer;
 
-REVOKE ALL ON database "Auction" FROM PUBLIC;    		-- Для разгранечния прав
+CREATE ROLE Admin with LOGIN PASSWORD 'AdMin';
+CREATE ROLE Expert with LOGIN PASSWORD 'ExPeRt';
+CREATE ROLE Seller with LOGIN PASSWORD 'qwerty';
+CREATE ROLE Customer with LOGIN PASSWORD 'CuStOmEr';
+
+GRANT CONNECT ON DATABASE "Auction" TO Seller;
+
+--REVOKE ALL ON database "Auction" FROM PUBLIC;    		-- Для разгранечния прав

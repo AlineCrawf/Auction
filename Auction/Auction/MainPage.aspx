@@ -6,7 +6,7 @@
 
  <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">   
         <div>
-            <asp:GridView ID="GridView2" runat="server" AutoGenerateColumns="False" SelectedRowStyle-BackColor="#99ccff" DataKeyNames="idtorg, idtovar" DataSourceID="SqlDataSource1" AllowSorting="True" OnSelectedIndexChanged="GridView2_SelectedIndexChanged">
+            <asp:GridView ID="GridView2" runat="server" AutoGenerateColumns="False" SelectedRowStyle-BackColor="#99ccff" DataKeyNames="idtorg,idtovar" DataSourceID="SqlDataSource2" AllowSorting="True" OnSelectedIndexChanged="GridView2_SelectedIndexChanged">
                 <Columns>
                     <asp:CommandField ShowSelectButton="True" />
                     <asp:BoundField DataField="idtorg" HeaderText="idtorg" InsertVisible="False" ReadOnly="True" SortExpression="idtorg" />
