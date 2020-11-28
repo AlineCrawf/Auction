@@ -9,7 +9,12 @@ namespace Auction
 {
     public partial class Admin : System.Web.UI.Page
     {
-        protected void Page_Load(object sender, EventArgs e)
+        protected void Page_PreInit(object sender, EventArgs e)
+        {
+            MasterPageFile = Application["masterPage"].ToString();
+        }
+
+            protected void Page_Load(object sender, EventArgs e)
         {
 
         }

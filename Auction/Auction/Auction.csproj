@@ -267,10 +267,11 @@
     <Content Include="Content\error_cat.jpg" />
     <Content Include="Content\Site.css" />
     <Content Include="css\account.css" />
+    <Content Include="css\mygridview.css" />
+    <Content Include="css\select2.css" />
     <Content Include="Customer.aspx" />
     <Content Include="Customer_shop.aspx" />
     <Content Include="ErrorPage.aspx" />
-    <Content Include="Example.aspx" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -283,13 +284,14 @@
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
     <Content Include="Request.aspx" />
-    <Content Include="SignUp.aspx" />
+    <Content Include="Sign_In.aspx" />
+    <Content Include="Sign_Up.aspx" />
     <Content Include="Torg.aspx" />
     <Content Include="Tovar.aspx" />
+    <Content Include="TovarWithoutTorg.aspx" />
     <Content Include="_CreateNewNuGetPackage\DoNotModify\NuGet.exe" />
     <Content Include="Account.Master" />
     <Content Include="Admin.Master" />
-    <Content Include="Example.Master" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="MainPage.aspx" />
     <Content Include="Scripts\bootstrap.js" />
@@ -320,7 +322,6 @@
     <Content Include="Scripts\WebForms\WebForms.js" />
     <Content Include="Scripts\WebForms\WebParts.js" />
     <Content Include="Scripts\WebForms\WebUIValidation.js" />
-    <Content Include="SignIn.aspx" />
     <Content Include="css\style.css" />
     <Content Include="Web.config" />
     <Content Include="Bundle.config" />
@@ -370,20 +371,6 @@
     <Compile Include="ErrorPage.aspx.designer.cs">
       <DependentUpon>ErrorPage.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Example.aspx.cs">
-      <DependentUpon>Example.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Example.aspx.designer.cs">
-      <DependentUpon>Example.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Example.Master.cs">
-      <DependentUpon>Example.Master</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Example.Master.designer.cs">
-      <DependentUpon>Example.Master</DependentUpon>
-    </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -409,19 +396,19 @@
     <Compile Include="Seller.Master.designer.cs">
       <DependentUpon>Seller.Master</DependentUpon>
     </Compile>
-    <Compile Include="SignIn.aspx.cs">
-      <DependentUpon>SignIn.aspx</DependentUpon>
+    <Compile Include="Sign_In.aspx.cs">
+      <DependentUpon>Sign_In.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="SignIn.aspx.designer.cs">
-      <DependentUpon>SignIn.aspx</DependentUpon>
+    <Compile Include="Sign_In.aspx.designer.cs">
+      <DependentUpon>Sign_In.aspx</DependentUpon>
     </Compile>
-    <Compile Include="SignUp.aspx.cs">
-      <DependentUpon>SignUp.aspx</DependentUpon>
+    <Compile Include="Sign_Up.aspx.cs">
+      <DependentUpon>Sign_Up.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="SignUp.aspx.designer.cs">
-      <DependentUpon>SignUp.aspx</DependentUpon>
+    <Compile Include="Sign_Up.aspx.designer.cs">
+      <DependentUpon>Sign_Up.aspx</DependentUpon>
     </Compile>
     <Compile Include="Torg.aspx.cs">
       <DependentUpon>Torg.aspx</DependentUpon>
@@ -436,6 +423,13 @@
     </Compile>
     <Compile Include="Tovar.aspx.designer.cs">
       <DependentUpon>Tovar.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="TovarWithoutTorg.aspx.cs">
+      <DependentUpon>TovarWithoutTorg.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="TovarWithoutTorg.aspx.designer.cs">
+      <DependentUpon>TovarWithoutTorg.aspx</DependentUpon>
     </Compile>
     <Compile Include="User.cs" />
   </ItemGroup>
