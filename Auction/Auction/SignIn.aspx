@@ -16,6 +16,7 @@
         <p><asp:TextBox ID="login" runat="server" name="login" value="" placeholder="Phone number"></asp:TextBox></p>
         <p><asp:TextBox ID="passwordBox" runat="server" type="password" name="password" value="" placeholder="Password"></asp:TextBox></p>          
         <p class="submit"><asp:Button ID="sign_in" runat="server" Text="Sign in" OnClick="sign_in_Click" /></p>
+        <a  href="SignUp"> Регистрация </a>
     </div>
   </section>
   </form>

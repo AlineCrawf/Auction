@@ -21,7 +21,8 @@
             <p><asp:TextBox ID="Phone" runat="server" name="Phone" placeholder="Phone" ></asp:TextBox></p>
 
             <p><asp:TextBox ID="passwordBox" runat="server" name="password" value="" placeholder="Password"></asp:TextBox></p>          
-            <p class="submit"><asp:Button ID="sign_up" runat="server" Text="Sign up" OnClick="sign_up_Click" /></p>
+            <p class="submit">
+                <asp:Button ID="sign_up" runat="server" Text="Sign up" OnClick="sign_up_Click" /></p>
         </div>
           <asp:GridView ID="GridView1" runat="server" DataSourceID="SqlDataSource1">
           </asp:GridView>

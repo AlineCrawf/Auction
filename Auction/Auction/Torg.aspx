@@ -3,12 +3,12 @@
 
  <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">   
         <div>
-            <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" DataKeyNames="idtorg_history, idtorg" DataSourceID="SqlDataSource1">
+            <asp:GridView ID="GridView1" runat="server" CssClass="Grid" AutoGenerateColumns="False" DataSourceID="SqlDataSource1">
                 <Columns>
-                    <asp:BoundField DataField="idtorg_history" HeaderText="idtorg_history" InsertVisible="False" ReadOnly="True" SortExpression="idtorg_history" />
-                    <asp:BoundField DataField="idpokupatel" HeaderText="idpokupatel" SortExpression="idpokupatel" />
-                    <asp:BoundField DataField="idtorg" HeaderText="idtorg" SortExpression="idtorg" />
-                    <asp:BoundField DataField="stavka" HeaderText="stavka" SortExpression="stavka" />
+                    <asp:BoundField DataField="user" HeaderText="Покупатель" SortExpression="user" />
+                    <asp:BoundField DataField="time_stavka" HeaderText="Время ставки" SortExpression="time_stavka" />
+                    <asp:BoundField DataField="idtorg" HeaderText="idtorg" SortExpression="idtorg" Visible="false" />
+                    <asp:BoundField DataField="stavka" HeaderText="Ставка" SortExpression="stavka" />
                 </Columns>
             </asp:GridView>
            
@@ -20,11 +20,15 @@
              <asp:Button ID="Button2" runat="server" OnClick="Button2_Click" Text="Закрыть торг" style="float:right"/>
 
             <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:AuctionConnectionString %>" ProviderName="<%$ ConnectionStrings:AuctionConnectionString.ProviderName %>"
-                SelectCommand="SELECT * FROM torg_history where idtorg = @idtorg">
+                SelectCommand="Select pl.name ||' ' ||pl.surname as user, tg.time_stavka, tg.idtorg, tg.stavka
+                                from torg_history tg
+                                inner join pokupatel p on tg.idpokupatel = p.idpokupatel
+                                inner join polzovately pl on p.idpolzovately = pl.id
+                                WHERE idtorg = @idtorg">
                 <SelectParameters>
                     <asp:CookieParameter CookieName="idtorg"  Name="idtorg" Type="Int32" />
                 </SelectParameters>
             </asp:SqlDataSource>
-            <asp:Label ID="Label1" runat="server" Visible="true"></asp:Label>
+            <asp:Label ID="Label1" runat="server" Visible="false"></asp:Label>
         </div>
 </asp:Content>

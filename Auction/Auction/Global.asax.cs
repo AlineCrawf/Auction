@@ -21,6 +21,9 @@ namespace Auction
             // Код, выполняемый при запуске приложения
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+            //Application["user_role"] = "customer";
+            //Application["user_phone"] = "+380635254502";
+           // Application["masterPage"] = "Account.Master";
         }
 
         void Application_Error(object sender, EventArgs e)
