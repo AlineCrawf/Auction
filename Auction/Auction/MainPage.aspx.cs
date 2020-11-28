@@ -12,10 +12,15 @@ namespace Auction
         protected void Page_PreInit(object sender, EventArgs e)
         {
             MasterPageFile = Application["masterPage"].ToString();
+            
         }
         protected void Page_Load(object sender, EventArgs e)
         {
-            Label1.Text = Application["user_phone"].ToString();
+            //Label1.Text = Application["user_phone"].ToString();
+            if (Application["user_role"].ToString() == "Admin")
+            {
+                GridView2.Columns[0].Visible = false;
+            }
         }
 
 
@@ -27,7 +32,7 @@ namespace Auction
             string idtorg = GridView2.SelectedDataKey.Values["idtorg"].ToString();
 
             Response.Cookies.Add(new HttpCookie("idtorg", idtorg));
-            
+            Session["idtorg"] = idtorg;
 
             Response.Redirect("torg", false);
             

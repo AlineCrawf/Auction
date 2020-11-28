@@ -11,6 +11,11 @@ namespace Auction
 {
     public partial class Customer1 : System.Web.UI.Page
     {
+        protected void Page_PreInit(object sender, EventArgs e)
+        {
+            MasterPageFile = Application["masterPage"].ToString();
+        }
+
         protected void Page_Load(object sender, EventArgs e)
         {
             Label1.Text += Application["user_phone"].ToString();
@@ -19,7 +24,7 @@ namespace Auction
 
         protected void Button1_Click(object sender, EventArgs e)
         {
-            using (NpgsqlConnection connection = new NpgsqlConnection(ConfigurationManager.ConnectionStrings["AuctionConnectionString"].ToString()))
+            using (NpgsqlConnection connection = new NpgsqlConnection(ConfigurationManager.ConnectionStrings[Application["ConnectionString"].ToString()].ToString()))
             {
 
                 connection.Open();
@@ -28,7 +33,7 @@ namespace Auction
 
                 idpokupatel_command.Parameters.AddWithValue("p_phone", Application["user_phone"].ToString());
                 int idpokupatel = (int)idpokupatel_command.ExecuteScalar();
-                Label1.Text = idpokupatel.ToString();
+               // Label1.Text = idpokupatel.ToString();
 
 
                 NpgsqlCommand command = new

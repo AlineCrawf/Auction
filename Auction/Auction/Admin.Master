@@ -14,15 +14,16 @@
     <form id="form1" runat="server">
          <div>
             <ul class="menu-main">
-              <li style="float:left"><a href="MainPage" class="current">Торги</a></li>
-              <li style="float:right"><a href="Request">Заявки</a></li>
+              <li><a href="MainPage" class="current">Торги</a></li>
+              <li ><a href="Request">Заявки</a></li>
+              <li><a href="Sign_In">Выйти</a></li>
             </ul>
         </div>
         <br/>
         <br/>
         <br/>
         <div>
-            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server" >
             </asp:ContentPlaceHolder>
         </div>
     </form>

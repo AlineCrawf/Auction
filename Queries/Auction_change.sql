@@ -17,14 +17,6 @@ CREATE TABLE Staff
 );
 	
 INSERT INTO Staff (udoslich, name, surname) values ('admin', 'Yura', 'Rudenko');
-
--- Update| Insert
-UPDATE Expert
-	SET idpolzovately = CASE idexpert 
-							when  1 then 14
-							when 2 then 15
-							when 3 then 16
-						end;
 						
 -- Queries
 CREATE OR REPLACE View roles as
@@ -147,7 +139,7 @@ $$ LANGUAGE 'sql'
 CREATE OR REPLACE FUNCTION insert_torg_history_stavka() RETURNS TRIGGER
 AS $$
 BEGIN
-	IF new.stavka <= (SELECT stavka FROM torg_history ORDER BY idtorg_history DESC LIMIT 1)
+	IF new.stavka <= (SELECT COALESCE(stavka, 1) FROM torg_history th WHERE th.idtorg = new.idtorg ORDER BY idtorg_history DESC LIMIT 1)
 		THEN RAISE EXCEPTION 'Ваша ставка должна быть больше последней сделанной';
 	END IF;
 	
@@ -172,3 +164,87 @@ BEGIN
 	UPDATE Pokupatel SET prodavec_request = false WHERE idpolzovately = p_idpolzovately;
 END;
 $$ LANGUAGE 'plpgsql';
+
+-- 24.11.2020
+
+DROP FUNCTION add_user(text, text, text, text, text, text);
+
+CREATE OR REPLACE FUNCTION public.add_user(
+	p_name text,
+	p_surname text,
+	p_udoslich text,
+	p_phone text,
+	p_email text)
+    RETURNS void
+    LANGUAGE 'plpgsql'
+
+    COST 100
+    VOLATILE 
+AS $BODY$
+DECLARE
+		v_idpolzovately int;
+		new_user text;
+BEGIN
+	IF p_email NOT LIKE '%@%' 
+		THEN RAISE EXCEPTION 'Некорректный email';
+	END IF;
+	
+	IF char_length(p_phone) != 13 
+		THEN RAISE EXCEPTION 'Некорректный номер телефона';
+	END IF;
+	
+
+	
+	INSERT INTO polzovately (udoslich, name, surname, email, telefon)
+			VALUES (p_udoslich, p_name, p_surname, p_email, p_phone)
+	RETURNING id INTO v_idpolzovately;
+			
+	INSERT INTO pokupatel (idpolzovately) VALUES (v_idpolzovately);
+	
+END;
+$BODY$;
+
+ALTER FUNCTION public.add_user(text, text, text, text, text)
+    OWNER TO postgres;
+
+CREATE OR REPLACE FUNCTION new_tovar(p_name text, sostoyanie text, p_idtypetovara int, p_idprodavec int, p_stoimosty numeric)
+							RETURNS Void
+AS $$
+BEGIN
+
+	INSERT INTO public.tovar( document, name, sostoyanie, idtypetovara, idprodavec, stoimosty)
+	VALUES ('doc '||p_name, p_name, sostoyanie::sostoyanie_t, p_idtypetovara, p_idprodavec, p_stoimosty);
+END;
+$$ LANGUAGE 'plpgsql';
+
+SELECT new_tovar('Левый носок Товарища Сталина', 'B/U', 3, 1, 666666);
+SELECT new_tovar('Правый носок Товарища Сталина', 'B/U', 3, 1, 666666);
+SELECT new_tovar('То что еще не придумал Илон Маск', 'novoe', 2, 2, 40);
+SELECT new_tovar('Ложе Аида', 'B/U', 1, 3, 1366613);
+
+
+CREATE OR REPLACE FUNCTION new_torg(p_idtovar int, p_min_stavka numeric )
+							RETURNS Void
+AS $$
+DECLARE 
+	v_id_torg int;
+BEGIN
+	INSERT INTO torg(
+	idtovar, data_open, data_close, max_stavka, min_stavka)
+	VALUES (p_idtovar, CURRENT_DATE, null,null , p_min_stavka)
+	RETURNING idtorg INTO v_id_torg;
+	
+	INSERT INTO torg_history(idpokupatel, idtorg, stavka)
+	VALUES ( 1, v_id_torg, p_min_stavka);
+END;
+$$ LANGUAGE 'plpgsql';
+
+ALTER TABLE torg
+	ALTER COLUMN max_stavka DROP NOT NULL;
+	
+SELECT new_torg(6,666666);
+SELECT new_torg(7,666666);
+SELECT new_torg(8,40);
+SELECT new_torg(9, 1366613);
+
+SELECT * FROM torg WHERE data_close IS NULL

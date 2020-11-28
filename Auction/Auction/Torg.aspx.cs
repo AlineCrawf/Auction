@@ -22,14 +22,18 @@ namespace Auction
         protected void Page_PreInit(object sender, EventArgs e)
         {
             MasterPageFile = Application["masterPage"].ToString();
+            //idtorg = (int) Session["idtorg"];
         }
 
         protected void Page_Load(object sender, EventArgs e)
         {
             Label1.Visible = false;
             TextBox1.BorderColor = Color.Black;
+            Label1.Visible = true;
+            //Label1.Text = "SSS" + Session["idtorg"];//idtorg.ToString();
+            GridView1.DataBind();
 
-            idtorg = Convert.ToInt32(GridView1.Rows[0].Cells[2].Text);
+             idtorg = Convert.ToInt32(Session["idtorg"]);//GridView1.Rows[1].Cells[1].Text);
             //timer = new System.Threading.Timer( new TimerCallback(Close_torg), null, 0, 30000);
            // Label1.Text = Application["user_phone"].ToString();
         }
@@ -60,7 +64,6 @@ namespace Auction
                 TextBox1.BorderColor = Color.Red;
                 return;
             }
-
            // TextBox1.BorderColor = Color.Black;
 
           //  timer.Change(0,30000);
@@ -75,7 +78,7 @@ namespace Auction
 
                 idpokupatel_command.Parameters.AddWithValue("p_phone", Application["user_phone"].ToString());
                 int idpokupatel = (int) idpokupatel_command.ExecuteScalar();
-                //Label1.Text = idpokupatel.ToString() + "FUCK";
+                //Label1.Text = idpokupatel.ToString()";
                
                 NpgsqlCommand command = new NpgsqlCommand("Insert into torg_history (idpokupatel, idtorg, stavka) " +
                     " values (@idpokupatel, @idtorg, @stavka)", connection);
