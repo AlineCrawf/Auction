@@ -1,16 +1,48 @@
---DROP ROLE Admin;
---DROP ROLE Expert;
---DROP ROLE Seller;
---DROP ROLE Customer;
+DROP ROLE  Admin;
+DROP ROLE Expert;
+DROP ROLE Seller;
+DROP ROLE Customer;
 
-CREATE ROLE Admin with LOGIN PASSWORD 'admin';
-CREATE ROLE Expert with LOGIN PASSWORD 'expert';
-CREATE ROLE Seller with LOGIN PASSWORD 'qwerty';
-CREATE ROLE Customer with LOGIN PASSWORD 'customer';
+CREATE ROLE admin with LOGIN PASSWORD 'admin';
+CREATE ROLE expert with LOGIN PASSWORD 'expert';
+CREATE ROLE seller with LOGIN PASSWORD 'seller';
+CREATE ROLE customer with LOGIN PASSWORD 'customer';
 
-GRANT CONNECT ON DATABASE "Auction" TO Seller; --Customer;
-REVOKE CONNECT ON DATABASE "Auction" FROM Seller; --Admin;
 
+GRANT CONNECT ON DATABASE "Auction" TO admin;
+GRANT CONNECT ON DATABASE "Auction" TO expert;
+GRANT CONNECT ON DATABASE "Auction" TO seller;
+GRANT CONNECT ON DATABASE "Auction" TO customer;
+
+
+-- Main Page
+GRANT SELECT ON TABLE open_torg TO admin, expert, seller, customer;
+
+-- Tovar
+GRANT SELECT ON TABLE Tovar TO   seller, customer;
+GRANT SELECT ON TABLE typetovara TO   seller, customer;
+GRANT SELECT ON TABLE torg TO  seller, customer;
+GRANT SELECT, INSERT ON TABLE torg_history TO  seller, customer;
+GRANT SELECT, INSERT, UPDATE ON TABLE pokupatel TO  seller, customer;
+GRANT SELECT ON TABLE polzovately TO  seller, customer;
+GRANT SELECT ON TABLE pokupatel TO  seller, customer;
+
+GRANT INSERT, UPDATE, DELETE ON Tovar TO seller;
+-- Customer_shop
+GRANT SELECT ON TABLE pokupki TO   seller, customer;
+
+-- Request
+GRANT SELECT, INSERT, UPDATE ON TABLE pokupatel TO admin;
+GRANT SELECT ON TABLE polzovately TO admin;
+GRANT SELECT, INSERT, UPDATE ON TABLE prodavec TO admin;
+GRANT USAGE ON SEQUENCE prodavec_idprodavec_seq TO admin;
+
+
+--REVOKE ALL ON ALL TABLES IN SCHEMA public FROM expert, seller, customer;
+
+--REVOKE CONNECT ON DATABASE "Auction" FROM Admin;
+--REVOKE CONNECT ON DATABASE "Auction" FROM Customer;
+/*
 SELECT t.* FROM prodavec INNER JOIN polzovately  ON id = idpolzovately INNER JOIN Tovar t USING(idprodavec) where telefon = '+380635254502'
 
 SELECT * FROM torg where idtovar = 10;
@@ -60,3 +92,4 @@ FROM pokupka p
 
 alter table pokupki
     owner to postgres;
+*/
