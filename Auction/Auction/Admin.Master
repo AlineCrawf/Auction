@@ -16,6 +16,7 @@
             <ul class="menu-main">
               <li><a href="MainPage" class="current">Торги</a></li>
               <li ><a href="Request">Заявки</a></li>
+                <li ><a href="UserActivityAnalytics">Статистика</a></li>
               <li><a href="Sign_In">Выйти</a></li>
             </ul>
         </div>

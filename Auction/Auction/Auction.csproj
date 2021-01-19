@@ -204,6 +204,7 @@
     <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.ValueTuple.4.5.0\lib\net47\System.ValueTuple.dll</HintPath>
     </Reference>
+    <Reference Include="System.Web.DataVisualization" />
     <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Drawing" />
@@ -289,6 +290,8 @@
     <Content Include="Torg.aspx" />
     <Content Include="Tovar.aspx" />
     <Content Include="TovarWithoutTorg.aspx" />
+    <Content Include="Tovar_stat.aspx" />
+    <Content Include="UserActivityAnalytics.aspx" />
     <Content Include="_CreateNewNuGetPackage\DoNotModify\NuGet.exe" />
     <Content Include="Account.Master" />
     <Content Include="Admin.Master" />
@@ -431,7 +434,21 @@
     <Compile Include="TovarWithoutTorg.aspx.designer.cs">
       <DependentUpon>TovarWithoutTorg.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Tovar_stat.aspx.cs">
+      <DependentUpon>Tovar_stat.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Tovar_stat.aspx.designer.cs">
+      <DependentUpon>Tovar_stat.aspx</DependentUpon>
+    </Compile>
     <Compile Include="User.cs" />
+    <Compile Include="UserActivityAnalytics.aspx.cs">
+      <DependentUpon>UserActivityAnalytics.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserActivityAnalytics.aspx.designer.cs">
+      <DependentUpon>UserActivityAnalytics.aspx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -441,6 +458,7 @@
     <Content Include="Scripts\jquery-3.4.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.4.1.min.map" />
     <Content Include="Seller.Master" />
+    <Content Include="userActivity.json" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

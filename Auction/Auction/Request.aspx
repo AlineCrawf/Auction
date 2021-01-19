@@ -6,7 +6,8 @@
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">   
     <div>
-             <asp:GridView runat="server" AutoGenerateColumns="False" DataKeyNames="idpolzovately, telefon" DataSourceID="SqlDataSource1" ID="GridView1" OnSelectedIndexChanged="Unnamed1_SelectedIndexChanged">
+            
+    <asp:GridView ID="GridView1" runat="server"  CssClass="Grid" AutoGenerateColumns="False" DataKeyNames="idpolzovately, telefon" DataSourceID="SqlDataSource1" OnSelectedIndexChanged="Unnamed1_SelectedIndexChanged">
                  <Columns>
                      <asp:CommandField ShowSelectButton="True" />
                      <asp:BoundField DataField="idpokupatel" HeaderText="idpokupatel" InsertVisible="False" ReadOnly="True" SortExpression="idpokupatel" />

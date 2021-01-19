@@ -54,8 +54,8 @@ namespace Auction
             }
             switch (role)
                 {
-                    case "Customer": master = "Account.Master"; conn = "CustomerConnectionString"; break;
-                    case "Seller": master = "Seller.Master"; conn = "SellerConnectionString";
+                    case "Customer": master = "Account.Master"; conn = "customerConnectionString"; break;
+                    case "Seller": master = "Seller.Master"; conn = "sellerConnectionString";
                     using (NpgsqlConnection connection = new NpgsqlConnection(ConfigurationManager.ConnectionStrings["AuctionConnectionString"].ToString()))
                     {
                         connection.Open();
@@ -64,17 +64,17 @@ namespace Auction
                         Session["idprodavec"] = command1.ExecuteScalar();
                     }
                                 break;
-                    case "Admin": master = "Admin.Master"; conn = "AdminConnectionString"; break;
+                    case "Admin": master = "Admin.Master"; conn = "adminConnectionString"; break;
                 }
 
                 Application.Add("MasterPage", master);
-                Application.Add("ConnectionString", "AuctionConnectionString");
+                Application.Add("ConnectionString", conn);
 
-                //login.Text = Session["idprodavec"].ToString();
-               
+            //login.Text =;
 
+            
                 // login.Text = Response.Cookies["user_phone"].Value.ToString() + " " + Response.Cookies["user_role"].Value.ToString();
-                Response.Redirect("MainPage", false);
+            Response.Redirect("MainPage", false);
                 // this.login.Text = Application.Get("user_phone").ToString();
             
         }

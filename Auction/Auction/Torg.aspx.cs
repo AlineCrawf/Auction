@@ -16,7 +16,7 @@ namespace Auction
     public partial class torg : System.Web.UI.Page
     {
         private int idtorg;
-        static System.Threading.Timer timer;
+        //static System.Threading.Timer timer;
         int time = 30;
 
         protected void Page_PreInit(object sender, EventArgs e)
@@ -27,6 +27,8 @@ namespace Auction
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            SqlDataSource1.ConnectionString = ConfigurationManager.ConnectionStrings[Application["ConnectionString"].ToString()].ConnectionString;
+
             Label1.Visible = false;
             TextBox1.BorderColor = Color.Black;
             Label1.Visible = true;

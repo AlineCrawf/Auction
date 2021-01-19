@@ -42,21 +42,21 @@
 					</span>
 
 					<div class="wrap-input100 validate-input">
-						<asp:TextBox ID="Name" runat="server"  name="Name" placeholder="Имя"></asp:TextBox> </div>
+						<asp:TextBox ID="Name" runat="server"  name="Name" placeholder="Имя" ValidateRequestMode="Enabled"></asp:TextBox> </div>
 					<div class="wrap-input100 validate-input">	
-						<asp:TextBox ID="Surname" runat="server"  name="Surname" placeholder="Фамилия"></asp:TextBox>
+						<asp:TextBox ID="Surname" runat="server"  name="Surname" placeholder="Фамилия" ValidateRequestMode="Enabled"></asp:TextBox>
 					</div>
 					<div class="wrap-input100 validate-input">
-						<asp:TextBox ID="Udoslich" runat="server" name="Udoslich" placeholder="Номер паспорта"></asp:TextBox>
+						<asp:TextBox ID="Udoslich" runat="server" name="Udoslich" placeholder="Номер паспорта" ValidateRequestMode="Enabled"></asp:TextBox>
 					</div>
 					<div class="wrap-input100 validate-input">
-						<asp:TextBox ID="Email" runat="server" name="Email" placeholder="Email"></asp:TextBox>
+						<asp:TextBox ID="Email" runat="server" name="Email" placeholder="Email" TextMode="Email" ValidateRequestMode="Enabled"></asp:TextBox>
 					</div>
 					<div class="wrap-input100 validate-input">	
-						<asp:TextBox ID="Phone" runat="server" name="Phone" placeholder="Номер телефона" ></asp:TextBox>
+						<asp:TextBox ID="Phone" runat="server" name="Phone" placeholder="Номер телефона" TextMode="Phone" ValidateRequestMode="Enabled" ></asp:TextBox>
 					</div>
 					<div class="wrap-input100 validate-input">
-						<asp:TextBox ID="passwordBox" type="password" runat="server" name="password" value="" placeholder="Пароль" OnTextChanged="passwordBox_TextChanged"></asp:TextBox>
+						<asp:TextBox ID="passwordBox" type="password" runat="server" name="password" value="" placeholder="Пароль" OnTextChanged="passwordBox_TextChanged" ValidateRequestMode="Enabled"></asp:TextBox>
 					</div>
 
 

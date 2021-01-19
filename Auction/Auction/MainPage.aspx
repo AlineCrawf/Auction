@@ -28,7 +28,7 @@
 
 <SelectedRowStyle BackColor="#99CCFF"></SelectedRowStyle>
             </asp:GridView>
-            <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:AuctionConnectionString %>" ProviderName="<%$ ConnectionStrings:AuctionConnectionString.ProviderName %>" SelectCommand="SELECT * FROM open_torg"></asp:SqlDataSource>
+            <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString='<%#  ConfigurationManager.ConnectionStrings[Application["ConnectionString"].ToString()].ConnectionString %>' ProviderName="<%$ ConnectionStrings:AuctionConnectionString.ProviderName %>" SelectCommand="SELECT * FROM open_torg"></asp:SqlDataSource>
             <asp:Label ID="Label1" runat="server" Text="Label" Visible="false" ></asp:Label >
         </div>
 </asp:Content>

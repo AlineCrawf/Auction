@@ -13,10 +13,11 @@ namespace Auction
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            SqlDataSource1.ConnectionString = ConfigurationManager.ConnectionStrings[Application["ConnectionString"].ToString()].ConnectionString;
 
         }
 
-        
+
         protected void Unnamed1_SelectedIndexChanged(object sender, EventArgs e)
         {
             int idpolzovately = Convert.ToInt32(GridView1.SelectedDataKey.Values["idpolzovately"].ToString());

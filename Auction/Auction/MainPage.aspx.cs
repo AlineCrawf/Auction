@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Configuration;
 
 namespace Auction
 {
@@ -12,6 +13,7 @@ namespace Auction
         protected void Page_PreInit(object sender, EventArgs e)
         {
             MasterPageFile = Application["masterPage"].ToString();
+
             
         }
         protected void Page_Load(object sender, EventArgs e)
@@ -21,6 +23,8 @@ namespace Auction
             {
                 GridView2.Columns[0].Visible = false;
             }
+
+            SqlDataSource1.ConnectionString = ConfigurationManager.ConnectionStrings[Application["ConnectionString"].ToString()].ConnectionString;
         }
 
 

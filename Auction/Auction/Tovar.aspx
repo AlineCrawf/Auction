@@ -3,6 +3,9 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <asp:Label ID="lb" runat="server"></asp:Label>
+ 
+    <asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl="~/Tovar_stat.aspx">Статистика</asp:HyperLink>
+ 
     <asp:GridView ID="GridView1" runat="server" CssClass="Grid" AllowSorting="True" AutoGenerateColumns="False" DataKeyNames="idtovar" DataSourceID="SqlDataSource1" ShowFooter="True" OnSelectedIndexChanged="GridView1_SelectedIndexChanged" >
         <Columns>
             <asp:CommandField ShowDeleteButton="True" ShowEditButton="True" ShowHeader="True" />
@@ -18,6 +21,8 @@
             </asp:TemplateField>
             <asp:BoundField DataField="idprodavec" HeaderText="idprodavec" SortExpression="idprodavec" Visible="false"/>
             <asp:BoundField DataField="stoimosty" HeaderText="Стоимость" SortExpression="stoimosty" />
+            <asp:BoundField DataField="torg" HeaderText="Создан торг" />
+            <asp:BoundField DataField="purchase" HeaderText="Продано" />
             <asp:TemplateField >
                 <FooterTemplate>
                     <asp:Button ID="Button1" runat="server" Text="Добавить" OnClick="Button1_Click" />
@@ -30,7 +35,12 @@
             <asp:LinkButton ID="LinkButton1" runat="server"  OnClick="Button1_Click">Добавить товар</asp:LinkButton>
         </EmptyDataTemplate>
     </asp:GridView>
-    <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:AuctionConnectionString %>" DeleteCommand="DELETE FROM tovar WHERE (idtovar = @idtovar)" InsertCommand="INSERT INTO tovar(idtovar, document, name, sostoyanie, idtypetovara, idprodavec, stoimosty) VALUES (@idtovar, @document, @name, @sostoyanie ::sostoyanie_t, @idtypetovara, @idprodavec, @stoimosty)" ProviderName="<%$ ConnectionStrings:AuctionConnectionString.ProviderName %>" SelectCommand="SELECT tovar.* , t.name as type , CASE when t2.idtovar IS NULL THEN true ELSE false END  as torg  FROM tovar INNER JOIN typetovara t USING(idtypetovara) LEFT JOIN torg t2 USING(idtovar) WHERE idprodavec = @idprodavec" UpdateCommand="UPDATE tovar SET document = @document, name = @name, sostoyanie = @sostoyanie :: sostoyanie_t, idtypetovara = @idtypetovara, idprodavec = @idprodavec, stoimosty = @stoimosty WHERE (idtovar = @idtovar)">
+    <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString='<%# ConfigurationManager.ConnectionStrings[Application["ConnectionString"].ToString()] %>' DeleteCommand="DELETE FROM tovar WHERE (idtovar = @idtovar)" InsertCommand="INSERT INTO tovar(idtovar, document, name, sostoyanie, idtypetovara, idprodavec, stoimosty) VALUES (@idtovar, @document, @name, @sostoyanie ::sostoyanie_t, @idtypetovara, @idprodavec, @stoimosty)" ProviderName="<%$ ConnectionStrings:AuctionConnectionString.ProviderName %>" SelectCommand="sELECT tovar.*, t.name as type, CASE when t2.idtovar IS NULL THEN 'Нет' ELSE 'Да'  END as torg,
+       CASE when p.idtovar IS NULL THEN 'Нет' ELSE 'Да' END as purchase
+FROM tovar
+         INNER JOIN typetovara t USING (idtypetovara)
+         LEFT JOIN pokupka p USING (idtovar)
+         LEFT JOIN torg t2 USING (idtovar) WHERE idprodavec = @idprodavec" UpdateCommand="UPDATE tovar SET document = @document, name = @name, sostoyanie = @sostoyanie :: sostoyanie_t,  idprodavec = @idprodavec, stoimosty = @stoimosty WHERE (idtovar = @idtovar)">
         <SelectParameters>  
             <asp:SessionParameter
                 Name="idprodavec"
@@ -47,7 +57,6 @@
             <asp:Parameter Name="document" Type="String" />
             <asp:Parameter Name="name" Type="String" />
             <asp:Parameter Name="sostoyanie" Type="String" />
-            <asp:Parameter Name="idtypetovara" Type="int32" />
             <asp:SessionParameter Name="idprodavec" SessionField="idprodavec"  Type="Int32"/>
             <asp:Parameter Name="stoimosty" Type="Decimal" />
         </InsertParameters>
@@ -55,13 +64,12 @@
             <asp:Parameter Name="document" Type="String" />
             <asp:Parameter Name="name" Type="String" />
             <asp:Parameter Name="sostoyanie" Type="String" />
-            <asp:Parameter Name="idtypetovara" Type="int32" />
             <asp:SessionParameter Name="idprodavec" SessionField="idprodavec"  Type="Int32"/>
             <asp:Parameter Name="stoimosty" Type="Decimal" />
             <asp:Parameter Name="idtovar" Type="int32" />
         </UpdateParameters>
     </asp:SqlDataSource>
-    <asp:SqlDataSource ID="SqlDataSource3" runat="server" ConnectionString="<%$ ConnectionStrings:AuctionConnectionString %>" ProviderName="<%$ ConnectionStrings:AuctionConnectionString.ProviderName %>" SelectCommand="SELECT * FROM &quot;typetovara&quot;"></asp:SqlDataSource>
+    <asp:SqlDataSource ID="SqlDataSource3" runat="server" ConnectionString='<%# ConfigurationManager.ConnectionStrings[Application["ConnectionString"].ToString()] %>' ProviderName="<%$ ConnectionStrings:AuctionConnectionString.ProviderName %>" SelectCommand="SELECT * FROM &quot;typetovara&quot;"></asp:SqlDataSource>
       
 
     <asp:textbox

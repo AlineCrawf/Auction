@@ -248,3 +248,27 @@ SELECT new_torg(8,40);
 SELECT new_torg(9, 1366613);
 
 SELECT * FROM torg WHERE data_close IS NULL
+
+
+CREATE OR REPLACE FUNCTION check_torg() RETURNS TRIGGER
+AS $$
+BEGIN
+  IF EXISTS (SELECT idtovar FROM torg tr WHERE tr.idtovar = new.idtovar)
+    THEN RAISE EXCEPTION 'Ваш товар уже внесен';
+  END IF;
+
+  RETURN new; -- Без этого ничего не произойдет
+
+END;
+$$ LANGUAGE 'plpgsql';
+
+CREATE TRIGGER insert_check_new_torg
+BEFORE INSERT ON torg
+FOR EACH ROW EXECUTE PROCEDURE check_torg();
+
+SELECT * FROM Torg;
+
+INSERT INTO Torg (idtovar, data_open, min_stavka)  VALUES (6,'2020-11-24 00:00:00.000000',666667)
+
+
+SELECT * FROM tovar;

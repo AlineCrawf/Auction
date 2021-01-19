@@ -19,7 +19,7 @@
             <asp:Button ID="Button1" runat="server" OnClick="Button1_Click" Text="Ставка" />
              <asp:Button ID="Button2" runat="server" OnClick="Button2_Click" Text="Закрыть торг" style="float:right"/>
 
-            <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:AuctionConnectionString %>" ProviderName="<%$ ConnectionStrings:AuctionConnectionString.ProviderName %>"
+            <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString='<%# ConfigurationManager.ConnectionStrings[Application["ConnectionString"].ToString()] %>' ProviderName="<%$ ConnectionStrings:AuctionConnectionString.ProviderName %>"
                 SelectCommand="Select pl.name ||' ' ||pl.surname as user, tg.time_stavka, tg.idtorg, tg.stavka
                                 from torg_history tg
                                 inner join pokupatel p on tg.idpokupatel = p.idpokupatel

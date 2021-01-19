@@ -22,8 +22,10 @@ namespace Auction
         {
             //GridView1.EmptyDataText = "У Вас нет товаров";
             //this.idprodavec.Text = v_idprodavec.ToString();
-           // lb.Text = Session["idprodavec"].ToString();
+            // lb.Text = Session["idprodavec"].ToString();
             //GridView1.DataBind();
+            SqlDataSource3.ConnectionString = SqlDataSource1.ConnectionString = ConfigurationManager.ConnectionStrings[Application["ConnectionString"].ToString()].ConnectionString;
+
         }
 
         protected void Button1_Click(object sender, EventArgs e)
@@ -46,11 +48,11 @@ namespace Auction
                 connection.Open();
                 NpgsqlCommand command = new NpgsqlCommand(
                     "INSERT INTO tovar(document, name, sostoyanie, idtypetovara, idprodavec, stoimosty) " +
-                    "VALUES(@document, @name, @sostoyanie::sostoyanie_t, @idtypetovara, @idprodavec, @stoimosty)"
+                    "VALUES (@document, @name, @sostoyanie::sostoyanie_t, @idtypetovara, @idprodavec, @stoimosty )"
                     , connection);
 
                  command.Parameters.AddWithValue("document", doc.Text);
-                command.Parameters.AddWithValue("name", name.Text);
+                command.Parameters.AddWithValue("name", name.Text);                                                                                                                                                                                                                                                         
                 command.Parameters.AddWithValue("sostoyanie", sostoyanieList.SelectedValue);
                 command.Parameters.AddWithValue("idtypetovara", Convert.ToInt32(typeList.SelectedValue));
                 command.Parameters.AddWithValue("idprodavec", Session["idprodavec"]);

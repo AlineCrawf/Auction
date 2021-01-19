@@ -26,13 +26,14 @@ namespace Auction
                 command.Parameters.AddWithValue("p_phone", Application["user_phone"].ToString());
 
                 v_idprodavec = (int)command.ExecuteScalar();
-                cookie.Value = v_idprodavec.ToString();
+                
             }
 
-            Response.Cookies.Add(cookie);
+            Session["idprodavec"] = v_idprodavec;
         }
         protected void Page_Load(object sender, EventArgs e)
         {
+            SqlDataSource1.ConnectionString = ConfigurationManager.ConnectionStrings[Application["ConnectionString"].ToString()].ConnectionString;
 
         }
 

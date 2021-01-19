@@ -14,5 +14,9 @@
             <asp:BoundField DataField="stoimosty" HeaderText="stoimosty" SortExpression="stoimosty" />
         </Columns>
     </asp:GridView>
-    <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:AuctionConnectionString %>" ProviderName="<%$ ConnectionStrings:AuctionConnectionString.ProviderName %>" SelectCommand="SELECT Tovar.*  FROM Tovar LEFT JOIN torg USING (idtovar) WHERE idtorg IS NULL"></asp:SqlDataSource>
+    <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString='<%# ConfigurationManager.ConnectionStrings[Application["ConnectionString"].ToString()] %>' ProviderName="<%$ ConnectionStrings:AuctionConnectionString.ProviderName %>" SelectCommand="SELECT Tovar.*  FROM Tovar LEFT JOIN torg USING (idtovar) WHERE idtorg IS NULL AND idprodavec = @idprodavec">
+        <SelectParameters>
+            <asp:SessionParameter Name="idprodavec" SessionField="idprodavec" Type="Int32" />
+        </SelectParameters>
+    </asp:SqlDataSource>
 </asp:Content>
