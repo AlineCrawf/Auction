@@ -20,9 +20,86 @@ FROM top_lot
          INNER JOIN typetovara t on tovar.idtypetovara = t.idtypetovara
 WHERE stavka_diff BETWEEN 0 AND 10000;
 
-GRANT SELECT ON TABLE toplot_stat TO seller;
-GRANT SELECT ON TABLE tovar TO admin;
-GRANT SELECT ON TABLE pokupka TO admin, seller;
+
+CREATE OR REPLACE FUNCTION new_dostavka(idpokupka int, dostavka_type text, adres text)
+    RETURNS VOID
+AS
+$$
+insert into dostavka(dostavka, idpokupka, adress)
+values (dostavka_type::dostavka_t, idpokupka, adres);
+$$ LANGUAGE 'sql';
+
+
+SELECT *
+FROM pokupki
+         INNER JOIN dostavka d on pokupki.idpokupka = d.idpokupka
+WHERE dostavka IS NULL;
+
+CREATE OR REPLACE FUNCTION dostavka_insert_trigger() RETURNS TRIGGER
+AS
+$$
+BEGIN
+    IF EXISTS(SELECT * FROM dostavka WHERE idpokupka = new.idpokupka)
+    THEN
+        RAISE EXCEPTION 'Доставка уже создана';
+    END IF;
+
+    RETURN new;
+END;
+$$ LANGUAGE 'plpgsql';
+
+CREATE TRIGGER unique_dostavka
+    BEFORE INSERT
+    ON dostavka
+    FOR EACH ROW
+EXECUTE PROCEDURE dostavka_insert_trigger();
+
+
+ALTER TABLE dostavka
+    ADD COLUMN registgration_date timestamp NOT NULL DEFAULT now();
+
+GRANT SELECT ON TABLE toplot_stat, dostavka TO seller;
+GRANT SELECT ON TABLE tovar, polzovately TO admin;
+GRANT SELECT ON TABLE prodavec, expertiza, polzovately TO expert;
+GRANT SELECT ON TABLE pokupka, expertiza TO admin, seller;
+
+GRANT SELECT, INSERT ON TABLE dostavka TO customer;
+GRANT EXECUTE ON FUNCTION new_dostavka(int, text, text) TO customer;
+
+SELECT Tovar.*
+FROM Tovar
+         LEFT JOIN torg USING (idtovar)
+         LEFT JOIN expertiza ex USING (idtovar)
+WHERE idtorg IS NULL
+  AND idprodavec = @idprodavec
+  AND podlinosty IS True
+  AND propaja IS false;
+SELECT *
+FROM tovar
+         INNER JOIN typetovara t USING (idtypetovara)
+         INNER JOIN prodavec p USING (idprodavec)
+         LEFT JOIN expertiza ex USING (idtovar);
+SELECT idtovar, name
+FROM tovar
+    LEFT JOIN expertiza ex USING(idtovar)
+WHERE idexpertiza IS NULL;
+
+SELECT *, pz.name || ' ' || pz.surname as fullname
+FROM tovar
+         INNER JOIN typetovara t USING (idtypetovara)
+         INNER JOIN prodavec p USING (idprodavec)
+         INNER JOIN polzovately pz ON p.idpolzovately = pz.id
+         LEFT JOIN expertiza ex USING (idtovar);
+
+
+ALTER TABLE expert
+    DROP COLUMN otchetadmin,
+    DROP COLUMN otchetprodavca;
+
+ALTER TABLE expertiza
+    ADD COLUMN otchetadmin    TEXT NOT NULL DEFAULT 'Empty',
+    ADD COLUMN otchetprodavca TEXT NOT NULL DEFAULT 'Empty',
+    ADD CONSTRAINT idtovar_unique UNIQUE (idtovar);
 
 ALTER TABLE polzovately
     ADD COLUMN registration_date timestamp NOT NULL DEFAULT now();
@@ -56,9 +133,23 @@ ALTER TABLE tovar
 
 -- DB users !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-SELECT tovar.*, t.name as type, CASE when t2.idtovar IS NULL THEN 'Да' ELSE 'Нет' END as torg,
-       CASE when p.idtovar IS NULL THEN 'Нет' ELSE 'Да' END as purchase
+SELECT tovar.*,
+       t.name                                                as type,
+       CASE when t2.idtovar IS NULL THEN 'Да' ELSE 'Нет' END as torg,
+       CASE when p.idtovar IS NULL THEN 'Нет' ELSE 'Да' END  as purchase
 FROM tovar
          INNER JOIN typetovara t USING (idtypetovara)
          LEFT JOIN pokupka p USING (idtovar)
-         LEFT JOIN torg t2 USING (idtovar) WHERE idprodavec is not null
+         LEFT JOIN torg t2 USING (idtovar)
+WHERE idprodavec is not null;
+
+----- Expert
+sELECT *
+FROM tovar
+         INNER JOIN typetovara t USING (idtypetovara)
+         INNER JOIN prodavec p USING (idprodavec)
+         LEFT JOIN expertiza ex USING (idtovar);
+
+ALTER TABLE expertiza
+    ADD COLUMN podlinosty BOOL NOT NULL DEFAULT true,
+    ADD COLUMN propaja    BOOL NOT NULL DEFAULT false;
