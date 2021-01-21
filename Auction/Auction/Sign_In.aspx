@@ -41,16 +41,23 @@
 					<span class="login100-form-title p-b-48">
 						<i class="zmdi zmdi-font"></i>
 					</span>
-
+					 
 					<div class="wrap-input100 validate-input" data-validate = "Valid email is: a@b.c">
+						<asp:RequiredFieldValidator ID="rfv1" ControlToValidate="login" runat="server" 
+            EnableClientScript="true" ErrorMessage="Обязательно" SetFocusOnError="true">
+					 </asp:RequiredFieldValidator>
 						<asp:TextBox ID="login" runat="server" class="input100"  type="text" name="Номер"/>
 						<span class="focus-input100" data-placeholder="Номер"></span>
 					</div>
 
 					<div class="wrap-input100 validate-input" data-validate="Введите пароль">
+						<asp:RequiredFieldValidator ID="RequiredFieldValidator1" ControlToValidate="password" runat="server" 
+            EnableClientScript="true" ErrorMessage="Обязательно" SetFocusOnError="true">
+						</asp:RequiredFieldValidator>
 						<span class="btn-show-pass">
 							<i class="zmdi zmdi-eye"></i>
-						</span>
+						</span>					
+					
 						<asp:TextBox runat="server" ID="password"  class="input100" type="password" name="pass"/>
 						<span class="focus-input100" data-placeholder="Пароль"></span>
 					</div>

@@ -284,6 +284,8 @@
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
+    <Content Include="Report.aspx" />
+    <Content Include="TovarWithExpertiza.aspx" />
     <Content Include="Request.aspx" />
     <Content Include="Sign_In.aspx" />
     <Content Include="Sign_Up.aspx" />
@@ -295,6 +297,7 @@
     <Content Include="_CreateNewNuGetPackage\DoNotModify\NuGet.exe" />
     <Content Include="Account.Master" />
     <Content Include="Admin.Master" />
+    <Content Include="Expert.Master" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="MainPage.aspx" />
     <Content Include="Scripts\bootstrap.js" />
@@ -374,6 +377,13 @@
     <Compile Include="ErrorPage.aspx.designer.cs">
       <DependentUpon>ErrorPage.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Expert.Master.cs">
+      <DependentUpon>Expert.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Expert.Master.designer.cs">
+      <DependentUpon>Expert.Master</DependentUpon>
+    </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -385,6 +395,20 @@
       <DependentUpon>MainPage.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Report.aspx.cs">
+      <DependentUpon>Report.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Report.aspx.designer.cs">
+      <DependentUpon>Report.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="TovarWithExpertiza.aspx.cs">
+      <DependentUpon>TovarWithExpertiza.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="TovarWithExpertiza.aspx.designer.cs">
+      <DependentUpon>TovarWithExpertiza.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Request.aspx.cs">
       <DependentUpon>Request.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

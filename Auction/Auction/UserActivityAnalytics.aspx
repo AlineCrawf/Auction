@@ -49,5 +49,4 @@
     </asp:Chart>
     <asp:SqlDataSource ID="PurchaseSqlDataSource" runat="server" ConnectionString="<%$ ConnectionStrings:adminConnectionString %>" ProviderName="<%$ ConnectionStrings:adminConnectionString.ProviderName %>" SelectCommand="SELECT  to_char(datapokupki, 'TMMonth') AS month, count(idpokupka)  FROM pokupka GROUP BY 1"></asp:SqlDataSource>
     <asp:SqlDataSource ID="UserSqlDataSource" runat="server"></asp:SqlDataSource>
-    <asp:Label ID="Label1" runat="server" Text="Label"></asp:Label>
-</asp:Content>
+    </asp:Content>

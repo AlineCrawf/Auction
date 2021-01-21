@@ -43,6 +43,7 @@ namespace Auction
                 catch (Exception ex)
                 {
                     login.BorderColor = password.BorderColor = Color.DarkRed;
+                    login.Text = password.Text = " ";
                     return;
                 }
 
@@ -64,9 +65,19 @@ namespace Auction
                         Session["idprodavec"] = command1.ExecuteScalar();
                     }
                                 break;
-                    case "Admin": master = "Admin.Master"; conn = "adminConnectionString"; break;
+                    case "Expert":
+                    master = "Expert.Master"; conn = "expertConnectionString";
+                    using (NpgsqlConnection connection = new NpgsqlConnection(ConfigurationManager.ConnectionStrings["AuctionConnectionString"].ToString()))
+                    {
+                        connection.Open();
+                        NpgsqlCommand command1 = new NpgsqlCommand("SELECT idexpert FROM expert INNER JOIN polzovately ON id = idpolzovately WHERE telefon = @p_phone", connection);
+                        command1.Parameters.AddWithValue("p_phone", Application["user_phone"].ToString());
+                        Session["idexpert"] = command1.ExecuteScalar();
+                    }
+                    break;
+                case "Admin": master = "Admin.Master"; conn = "adminConnectionString"; break;
                 }
-
+            
                 Application.Add("MasterPage", master);
                 Application.Add("ConnectionString", conn);
 

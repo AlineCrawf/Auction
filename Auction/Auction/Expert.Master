@@ -1,0 +1,34 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Expert.master.cs" Inherits="Auction.Expert" %>
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <link rel="stylesheet" href="css/account.css">
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <form id="form1" runat="server">
+         <div>
+            <ul class="menu-main">
+              <li ><a href="MainPage" class="current">Торги</a></li>
+              <li ><a href="TovarWithExpertiza"> Товары </a></li>
+              <li ><a href="Report">Отчеты</a></li>
+              <li><a href="Sign_In">Выйти</a></li>
+            </ul>
+        </div>
+        <br/>
+        <br/>
+        <br/>
+        <div>
+            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server" >
+                
+            </asp:ContentPlaceHolder>
+        </div>
+    </form>
+</body>
+</html>
+
